@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DeltaVN HuyMythic | Exclusive Cosmic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #c5a059;
+            --dark-deep: #020202;
+            --border-color: rgba(197, 160, 89, 0.2);
+        }
+
+        body {
+            background-color: var(--dark-deep);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            min-height: -webkit-fill-available; /* Tối ưu chiều cao cho trình duyệt Safari iOS */
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        /* Nền hiệu ứng vũ trụ sâu thẳm */
+        .bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            z-index: 1;
+        }
+
+        /* KHUNG TRUNG TÂM - Đã tối ưu padding và width cho iPhone */
+        .main-frame {
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+            max-width: 90%;
+            width: 400px; /* Cố định chiều rộng tối đa cho mobile */
+            animation: frameGlow 4s infinite alternate;
+            border-radius: 4px;
+        }
+
+        @keyframes frameGlow {
+            from { border-color: rgba(197, 160, 89, 0.1); }
+            to { border-color: rgba(197, 160, 89, 0.4); }
+        }
+
+        /* Tên thương hiệu - Chỉnh clamp để không bị nhảy dòng trên máy màn hình nhỏ */
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 8vw, 2.5rem);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+            color: #fff;
+            background: linear-gradient(135deg, #fff 30%, var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+            line-height: 1.4;
+        }
+
+        /* NÚT TỰ ĐỘNG LẤP LÁNH - Tối ưu kích thước chạm cho iPhone */
+        .btn-destination {
+            position: relative;
+            padding: 16px 24px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid var(--primary-gold);
+            background: rgba(197, 160, 89, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%; /* Nút chiếm toàn bộ chiều rộng khung trên mobile */
+            max-width: 280px;
+        }
+
+        .btn-destination:active {
+            transform: scale(0.92);
+            background: rgba(197, 160, 89, 0.2);
+        }
+
+        .btn-destination::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 80%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-30deg);
+            animation: autoShimmer 3.5s infinite linear;
+        }
+
+        @keyframes autoShimmer {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* HIỆU ỨNG SAO BĂNG */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, #fff, transparent);
+        }
+
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+            10% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateX(400px) translateY(300px) rotate(-35deg); opacity: 0; }
+        }
+
+        /* HIỆU ỨNG SAO LẤP LÁNH */
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 2;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Tối ưu riêng cho các dòng máy màn hình rất nhỏ */
+        @media (max-width: 375px) {
+            .main-frame { padding: 35px 15px; }
+            .brand-name { font-size: 1.3rem; }
+            .btn-destination { padding: 14px 20px; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    
+    <div class="main-frame">
+        <h1 class="brand-name">DeltaVN<br class="sm:hidden"> HuyMythic</h1>
+        <div class="mt-4">
+            <a href="https://zufile.com/download/1uLn5vbvuo" target="_blank" rel="noopener noreferrer" class="btn-destination">
+                Ấn để đến trang đích
+            </a>
+        </div>
+    </div>
+
+    <!-- Container cho sao và sao băng -->
+    <div id="star-field" class="absolute inset-0 pointer-events-none"></div>
+
+    <script>
+        const field = document.getElementById('star-field');
+
+        // Giảm số lượng sao trên mobile để mượt mà hơn (80 thay vì 150)
+        const isMobile = window.innerWidth < 768;
+        const starCount = isMobile ? 80 : 150;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 1.5 + 0.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            
+            star.style.backgroundColor = Math.random() > 0.8 ? '#c5a059' : '#fff';
+            
+            star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite alternate ease-in-out`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            field.appendChild(star);
+        }
+
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            star.style.top = Math.random() * 50 + '%';
+            star.style.left = Math.random() * 80 + '%';
+            
+            const duration = Math.random() * 0.8 + 0.8; 
+            star.style.animation = `shoot ${duration}s linear forwards`;
+            
+            field.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+            }, duration * 1000);
+        }
+
+        // Tần suất sao băng vừa phải để không gây lag cho iPhone
+        setInterval(createShootingStar, 3000);
+        setTimeout(createShootingStar, 1000);
+    </script>
+</body>
+</html>
